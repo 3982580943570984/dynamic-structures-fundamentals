@@ -55,6 +55,12 @@ node* append(node* head, int value) {
     return head;
 }
 
+/**
+ * Sum numbers in a vector.
+ *
+ * @param values Container whose values are summed.
+ * @return sum of `values`, or 0.0 if `values` is empty.
+ */
 node* createSet(int amount, int min, int max) {
     std::random_device rd;
     std::mt19937 gen(rd());

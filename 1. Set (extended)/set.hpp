@@ -18,7 +18,7 @@ bool isContained(node *head, int value);
 // F4
 node *append(node *head, int value);
 // F5
-node *createSet(int amount, int min, int max);
+node *createSet(int amount, int min, int max, bool type = false);
 // F6
 int cardinality(node *head);
 // F7

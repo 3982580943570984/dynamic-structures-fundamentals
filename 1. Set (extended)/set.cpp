@@ -26,11 +26,8 @@ node *append(node *head, int value) {
 }
 
 // F5
-node *createSet(int amount, int min, int max) {
-  if (min > max)
-    return nullptr;
-
-  if (max - min < amount)
+node *createSet(int amount, int min, int max, bool type) {
+  if (max - min < amount || min > max)
     return nullptr;
 
   std::random_device rd;
@@ -38,8 +35,15 @@ node *createSet(int amount, int min, int max) {
   std::uniform_int_distribution<> distr(min, max);
 
   node *list = createEmptySet();
-  for (int i = 0; i < amount; i++)
-    list = append(list, distr(gen));
+  std::int32_t count = 0;
+  while (count < amount) {
+    std::int32_t value = distr(gen);
+    type ? value -= value % 3 : value -= value % 9;
+    node *comp = list;
+    list = append(list, value);
+    if (comp != list)
+      ++count;
+  }
   return list;
 }
 

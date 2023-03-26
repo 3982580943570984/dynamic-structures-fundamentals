@@ -6,9 +6,9 @@ std::int32_t main() {
   auto A = new set{}, B = new set{};
 
   // F5
-  A->generate(10, 0, 100, 3);
+  A->generate(10, 12, 100, 3);
   std::cout << "Сгенерированное множество A: " << A->to_string() << std::endl;
-  B->generate(10, 0, 100, 9);
+  B->generate(10, 18, 100, 9);
   std::cout << "Сгенерированное множество B: " << B->to_string() << std::endl;
 
   // F6

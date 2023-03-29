@@ -67,26 +67,16 @@ int main() {
   std::uint32_t N{0};
   make_input(N);
 
-  auto A_extended = createSet(N, 10, N * 10, true),
-       B_extended = createSet(N, 10, N * 10, true);
-
+  auto A_extended = nullptr, B_extended = nullptr;
   auto A_class = set_class(), B_class = set_class();
-  A_class.generate(N, 10, N * 10, true);
-  B_class.generate(N, 10, N * 10, true);
-
   auto A_list = set_list(), B_list = set_list();
-  A_list.generate(N, 10, N * 10, true);
-  B_list.generate(N, 10, N * 10, true);
-
   auto A_set = set_set(), B_set = set_set();
-  A_set.generate(N, 10, N * 10, true);
-  B_set.generate(N, 10, N * 10, true);
 
   constexpr int column_size = 5;
   std::array<std::wstring, column_size> headers{
       {L"", L"Односв. список", L"Класс Список", L"Класс List", L"Класс Set"}};
 
-  std::array<std::array<std::wstring, column_size>, 11> data{
+  std::array<std::array<std::wstring, column_size>, 11> data = {
       {{{L"Генерация",
          measure(createSet, static_cast<int>(N), static_cast<int>(10),
                  static_cast<int>(N * 10), static_cast<int>(true)),

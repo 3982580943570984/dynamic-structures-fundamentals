@@ -84,17 +84,17 @@ node_ *deleteSet(node_ *head) {
 
 // F9
 bool isSubset(node_ *subset, node_ *set) {
-  std::vector<std::int32_t> sortedSet;
-  node_ *iter = set;
-  while (iter != nullptr) {
-    sortedSet.push_back(iter->value);
-    iter = iter->next;
-  }
-  std::sort(sortedSet.begin(), sortedSet.end());
+  // std::vector<std::int32_t> sortedSet;
+  // node_ *iter = set;
+  // while (iter != nullptr) {
+  //   sortedSet.push_back(iter->value);
+  //   iter = iter->next;
+  // }
+  // std::sort(sortedSet.begin(), sortedSet.end());
 
-  iter = subset;
+  auto iter = subset;
   while (iter != nullptr) {
-    if (!std::binary_search(sortedSet.cbegin(), sortedSet.cend(), iter->value))
+    if (!isContained(set, iter->value))
       return false;
     iter = iter->next;
   }
@@ -135,18 +135,17 @@ node_ *makeUnion(node_ *first, node_ *second) {
 node_ *makeIntersection(node_ *first, node_ *second) {
   node_ *output = createEmptySet();
 
-  std::vector<std::int32_t> sortedSecond;
-  node_ *iter = second;
-  while (iter != nullptr) {
-    sortedSecond.push_back(iter->value);
-    iter = iter->next;
-  }
-  std::sort(sortedSecond.begin(), sortedSecond.end());
+  // std::vector<std::int32_t> sortedSecond;
+  // node_ *iter = second;
+  // while (iter != nullptr) {
+  //   sortedSecond.push_back(iter->value);
+  //   iter = iter->next;
+  // }
+  // std::sort(sortedSecond.begin(), sortedSecond.end());
 
-  iter = first;
+  auto iter = second;
   while (iter != nullptr) {
-    if (std::binary_search(sortedSecond.cbegin(), sortedSecond.cend(),
-                           iter->value))
+    if (isContained(first, iter->value))
       output = append(output, iter->value);
     iter = iter->next;
   }
@@ -158,18 +157,17 @@ node_ *makeIntersection(node_ *first, node_ *second) {
 node_ *makeComplement(node_ *first, node_ *second) {
   node_ *output = createEmptySet();
 
-  std::vector<std::int32_t> sortedSecond;
-  node_ *iter = second;
-  while (iter != nullptr) {
-    sortedSecond.push_back(iter->value);
-    iter = iter->next;
-  }
-  std::sort(sortedSecond.begin(), sortedSecond.end());
+  // std::vector<std::int32_t> sortedSecond;
+  // node_ *iter = second;
+  // while (iter != nullptr) {
+  //   sortedSecond.push_back(iter->value);
+  //   iter = iter->next;
+  // }
+  // std::sort(sortedSecond.begin(), sortedSecond.end());
 
-  iter = first;
+  auto iter = second;
   while (iter != nullptr) {
-    if (!std::binary_search(sortedSecond.cbegin(), sortedSecond.cend(),
-                            iter->value))
+    if (!isContained(first, iter->value))
       output = append(output, iter->value);
     iter = iter->next;
   }

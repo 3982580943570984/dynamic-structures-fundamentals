@@ -5,7 +5,7 @@
 
 class Set {
 public:
-  std::list<int32_t> list;
+  std::list<int32_t> m_list;
 
   // F1
   Set();

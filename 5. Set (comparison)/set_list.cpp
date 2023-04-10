@@ -11,15 +11,17 @@ set_list::~set_list() {}
 bool set_list::empty() { return m_list.empty(); }
 
 bool set_list::contains(int value) {
-  return std::binary_search(m_list.begin(), m_list.end(), value);
+  for (const auto &e : this->m_list)
+    if (e == value)
+      return true;
+  return false;
 }
 
 bool set_list::insert(int value) {
   if (contains(value))
     return false;
 
-  auto iter = std::lower_bound(m_list.begin(), m_list.end(), value);
-  m_list.insert(iter, value);
+  m_list.push_front(value);
   return true;
 }
 

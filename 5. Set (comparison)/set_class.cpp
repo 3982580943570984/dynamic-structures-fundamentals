@@ -92,19 +92,19 @@ std::string set_class::to_string(char separator) {
 
 // F9
 bool set_class::is_subset(set_class *other) {
-  std::vector<int> sorted;
+  // std::vector<int> sorted;
+
+  // auto iter = other->head;
+  // while (iter != nullptr) {
+  //   sorted.push_back(iter->value);
+  //   iter = iter->next;
+  // }
+
+  // std::sort(sorted.begin(), sorted.end());
 
   auto iter = other->head;
   while (iter != nullptr) {
-    sorted.push_back(iter->value);
-    iter = iter->next;
-  }
-
-  std::sort(sorted.begin(), sorted.end());
-
-  iter = head;
-  while (iter != nullptr) {
-    if (!std::binary_search(sorted.cbegin(), sorted.cend(), iter->value))
+    if (!contains(iter->value))
       return false;
     iter = iter->next;
   }
@@ -142,19 +142,19 @@ set_class *set_class::make_union(set_class *other) {
 set_class *set_class::make_intersection(set_class *other) {
   auto output = new set_class{};
 
-  std::vector<int> sorted;
+  // std::vector<int> sorted;
+
+  // auto iter = other->head;
+  // while (iter != nullptr) {
+  //   sorted.push_back(iter->value);
+  //   iter = iter->next;
+  // }
+
+  // std::sort(sorted.begin(), sorted.end());
 
   auto iter = other->head;
   while (iter != nullptr) {
-    sorted.push_back(iter->value);
-    iter = iter->next;
-  }
-
-  std::sort(sorted.begin(), sorted.end());
-
-  iter = head;
-  while (iter != nullptr) {
-    if (std::binary_search(sorted.cbegin(), sorted.cend(), iter->value))
+    if (contains(iter->value))
       output->insert(iter->value);
     iter = iter->next;
   }
@@ -166,19 +166,19 @@ set_class *set_class::make_intersection(set_class *other) {
 set_class *set_class::make_complement(set_class *other) {
   auto output = new set_class{};
 
-  std::vector<int> sorted;
+  // std::vector<int> sorted;
+
+  // auto iter = other->head;
+  // while (iter != nullptr) {
+  //   sorted.push_back(iter->value);
+  //   iter = iter->next;
+  // }
+
+  // std::sort(sorted.begin(), sorted.end());
 
   auto iter = other->head;
   while (iter != nullptr) {
-    sorted.push_back(iter->value);
-    iter = iter->next;
-  }
-
-  std::sort(sorted.begin(), sorted.end());
-
-  iter = head;
-  while (iter != nullptr) {
-    if (!std::binary_search(sorted.cbegin(), sorted.cend(), iter->value))
+    if (!contains(iter->value))
       output->insert(iter->value);
     iter = iter->next;
   }
@@ -188,12 +188,12 @@ set_class *set_class::make_complement(set_class *other) {
 
 // F14
 set_class *set_class::make_symmetricDifference(set_class *other) {
-  auto _union = make_union(other);
-  auto _intersection = make_intersection(other);
-  auto _difference = _union->make_complement(_intersection);
+  // auto _union = make_union(other);
+  // auto _intersection = make_intersection(other);
+  // auto _difference = _union->make_complement(_intersection);
 
-  delete _union;
-  delete _intersection;
+  // delete _union;
+  // delete _intersection;
 
-  return _difference;
+  return make_union(other)->make_complement(make_intersection(other));
 };

@@ -14,7 +14,6 @@ class set_class {
 public:
   node *head = nullptr;
 
-public:
   // F1
   set_class();
   // F8

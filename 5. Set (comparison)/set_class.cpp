@@ -1,7 +1,7 @@
 #include "set_class.hpp"
 
 // F1
-set_class::set_class(){};
+set_class::set_class() {}
 
 // F8
 set_class::~set_class() {

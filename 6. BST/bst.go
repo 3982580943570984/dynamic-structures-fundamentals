@@ -22,13 +22,13 @@ func NewBST() *BST {
 }
 
 /* Проверка пустоты */
-func (bst *BST) isEmpty() bool {
+func (bst *BST) IsEmpty() bool {
 	return bst.Root == nil
 }
 
 /* Добавление нового узла */
 func (bst *BST) Insert(value int) {
-	if bst.isEmpty() {
+	if bst.IsEmpty() {
 		bst.Root = &Node{Value: value}
 		return
 	}
@@ -57,7 +57,7 @@ func (bst *BST) CreateTree(min, max, count int) {
 
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := 0; i < count; i++ {
-		value := r.Intn(max-min) + min
+		value := r.Intn(max-min+1) + min
 		bst.Insert(value)
 	}
 }
@@ -76,6 +76,40 @@ func (bst *BST) preorderRecursive(node *Node, result *string) {
 	*result += strconv.Itoa(node.Value) + " "
 	bst.preorderRecursive(node.Left, result)
 	bst.preorderRecursive(node.Right, result)
+}
+
+/* Обход слева направо */
+func (bst *BST) Inorder() string {
+	result := ""
+	bst.inorderRecursive(bst.Root, &result)
+	return result
+}
+
+func (bst *BST) inorderRecursive(node *Node, result *string) {
+	if node == nil {
+		return
+	}
+
+	bst.inorderRecursive(node.Left, result)
+	*result += strconv.Itoa(node.Value) + " "
+	bst.inorderRecursive(node.Right, result)
+}
+
+/* Обход снизу вверх*/
+func (bst *BST) Postorder() string {
+	result := ""
+	bst.postorderRecursive(bst.Root, &result)
+	return result
+}
+
+func (bst *BST) postorderRecursive(node *Node, result *string) {
+	if node == nil {
+		return
+	}
+
+	bst.postorderRecursive(node.Left, result)
+	bst.postorderRecursive(node.Right, result)
+	*result += strconv.Itoa(node.Value) + " "
 }
 
 /* Удаление дерева */
